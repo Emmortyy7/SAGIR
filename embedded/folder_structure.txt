@@ -1,1 +1,17 @@
+board/
+→ STM32F446R, pins, clock etc.
 
+drivers/
+→ SX1262, sensors etc.
+
+app/
+→ main loop.
+
+config/
+→ configurations for compiling and hardware.
+
+include/
+→ common headers.
+
+build/
+→ compiling.
