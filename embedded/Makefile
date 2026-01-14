@@ -22,35 +22,35 @@ CFLAGS = \
 	-DUSE_HAL_DRIVER
 
 LDFLAGS = \
-	-T embedded/linker/STM32F446RE_FLASH.ld \
+	-T linker/STM32F446RE_FLASH.ld \
 	-Wl,--gc-sections
 
 INCLUDES = \
-	-Iembedded/include \
-	-Iembedded/board \
-	-Iembedded/drivers \
-	-Iembedded/config \
-	-Iembedded/board/stm32f446 \
-	-Iembedded/hal/CMSIS/Core/Include \
-	-Iembedded/hal/CMSIS/Device/ST/STM32F4xx/Include \
-	-Iembedded/hal/STM32F4xx_HAL_Driver/Inc
+	-Iinclude \
+	-Iboard \
+	-Idrivers \
+	-Iconfig \
+	-Iboard/stm32f446 \
+	-Ihal/CMSIS/Core/Include \
+	-Ihal/CMSIS/Device/ST/STM32F4xx/Include \
+	-Ihal/STM32F4xx_HAL_Driver/Inc
 
 SRC_APP = \
-	embedded/app/main.c
+	app/main.c
 
 SRC_BOARD = \
-	embedded/board/board.c \
-	embedded/board/stm32f446/board.c
+	board/board.c \
+	board/stm32f446/board.c
 
 SRC_HAL = \
-	embedded/hal/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c \
-	embedded/hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
-	embedded/hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
-	embedded/hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
-	embedded/hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+	hal/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c \
+	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
+	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
 
 SRC_ARCH = \
-	embedded/arch/arm/cortex-m4/startup_stm32f446xx.s
+	arch/arm/cortex-m4/startup_stm32f446xx.s
 
 SRC_C = $(SRC_APP) $(SRC_BOARD) $(SRC_HAL)
 SRC_S = $(SRC_ARCH)
