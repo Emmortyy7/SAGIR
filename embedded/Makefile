@@ -28,9 +28,9 @@ LDFLAGS = \
 INCLUDES = \
 	-Iinclude \
 	-Iboard \
+	-Iboard/stm32f446 \
 	-Idrivers \
 	-Iconfig \
-	-Iboard/stm32f446 \
 	-Ihal/CMSIS/Core/Include \
 	-Ihal/CMSIS/Device/ST/STM32F4xx/Include \
 	-Ihal/STM32F4xx_HAL_Driver/Inc
@@ -39,7 +39,6 @@ SRC_APP = \
 	app/main.c
 
 SRC_BOARD = \
-	board/board.c \
 	board/stm32f446/board.c
 
 SRC_HAL = \
