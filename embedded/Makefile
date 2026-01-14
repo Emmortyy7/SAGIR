@@ -1,52 +1,98 @@
-# -------- Toolchain --------
+# ==========================
+# Toolchain
+# ==========================
 CC      = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
 
-# -------- Target --------
-TARGET  = firmware
 
-# -------- MCU --------
-MCU     = cortex-m4
-FPU     = fpv4-sp-d16
-FLOAT   = hard
+# ==========================
+# Output files
+# ==========================
+TARGET_ELF = firmware.elf
+TARGET_BIN = firmware.bin
 
-CFLAGS  = -mcpu=$(MCU) -mthumb -mfpu=$(FPU) -mfloat-abi=$(FLOAT)
-CFLAGS += -Wall -O0 -g
-CFLAGS += -ffunction-sections -fdata-sections
 
-LDFLAGS = -T embedded/linker/STM32F446RE_FLASH.ld
-LDFLAGS += -Wl,--gc-sections
+# ==========================
+# MCU configuration
+# ==========================
+MCU   = cortex-m4
+FPU   = fpv4-sp-d16
+FLOAT = hard
 
-# -------- Includes --------
-INCLUDES  = -Iembedded/board/stm32f446
-INCLUDES += -Iembedded/hal/CMSIS/Core/Include
-INCLUDES += -Iembedded/hal/CMSIS/Device/ST/STM32F4xx/Include
 
-# -------- Sources --------
-SRCS  = embedded/app/main.c
-SRCS += embedded/board/stm32f446/board.c
-SRCS += embedded/hal/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
-SRCS += embedded/arch/arm/cortex-m4/startup_stm32f446xx.s
+# ==========================
+# Compiler flags
+# ==========================
+CFLAGS = \
+	-mcpu=$(MCU) \
+	-mthumb \
+	-mfpu=$(FPU) \
+	-mfloat-abi=$(FLOAT) \
+	-Wall \
+	-O0 \
+	-g \
+	-ffunction-sections \
+	-fdata-sections
 
-# -------- Objects --------
-OBJS = $(SRCS:.c=.o)
-OBJS := $(OBJS:.s=.o)
 
-# -------- Rules --------
-all: $(TARGET).elf $(TARGET).bin
+# ==========================
+# Linker flags
+# ==========================
+LDFLAGS = \
+	-T embedded/linker/STM32F446RE_FLASH.ld \
+	-Wl,--gc-sections
+
+
+# ==========================
+# Include paths
+# ==========================
+INCLUDES = \
+	-Iembedded/board/stm32f446 \
+	-Iembedded/hal/CMSIS/Core/Include \
+	-Iembedded/hal/CMSIS/Device/ST/STM32F4xx/Include
+
+
+# ==========================
+# Source files
+# ==========================
+SRC_C = \
+	embedded/app/main.c \
+	embedded/board/stm32f446/board.c \
+	embedded/hal/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
+
+SRC_S = \
+	embedded/arch/arm/cortex-m4/startup_stm32f446xx.s
+
+
+# ==========================
+# Object files
+# ==========================
+OBJ_C = $(SRC_C:.c=.o)
+OBJ_S = $(SRC_S:.s=.o)
+OBJS  = $(OBJ_C) $(OBJ_S)
+
+
+# ==========================
+# Build rules
+# ==========================
+all: $(TARGET_ELF) $(TARGET_BIN)
+
+
+$(TARGET_ELF): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $@
+
+
+$(TARGET_BIN): $(TARGET_ELF)
+	$(OBJCOPY) -O binary $< $@
+
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+
 %.o: %.s
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TARGET).elf: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $@
-
-$(TARGET).bin: $(TARGET).elf
-	$(OBJCOPY) -O binary $< $@
 
 clean:
-	rm -f $(OBJS) $(TARGET).elf $(TARGET).bin
-
+	rm -f $(OBJS) $(TARGET_ELF) $(TARGET_BIN)
