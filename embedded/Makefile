@@ -1,8 +1,8 @@
 CC      = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
 
-TARGET_ELF = firmware.elf
-TARGET_BIN = firmware.bin
+TARGET_ELF = build/firmware.elf
+TARGET_BIN = build/firmware.bin
 
 MCU   = cortex-m4
 FPU   = fpv4-sp-d16
