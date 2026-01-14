@@ -22,10 +22,11 @@ CFLAGS = \
 	-DUSE_HAL_DRIVER
 
 LDFLAGS = \
-	-T linker/STM32F446RE_FLASH.ld \
+	-T linker/STM32F446XX_FLASH.ld \
 	-Wl,--gc-sections
 
 INCLUDES = \
+	-ICore/Inc \
 	-Iinclude \
 	-Iboard \
 	-Iboard/stm32f446 \
@@ -41,8 +42,11 @@ SRC_APP = \
 SRC_BOARD = \
 	board/stm32f446/board.c
 
+SRC_CUBEMX = \
+	Core/Src/system_stm32f4xx.c \
+	Core/Src/stm32f4xx_it.c
+
 SRC_HAL = \
-	hal/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c \
 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
@@ -51,7 +55,7 @@ SRC_HAL = \
 SRC_ARCH = \
 	arch/arm/cortex-m4/startup_stm32f446xx.s
 
-SRC_C = $(SRC_APP) $(SRC_BOARD) $(SRC_HAL)
+SRC_C = $(SRC_APP) $(SRC_BOARD) $(SRC_CUBEMX) $(SRC_HAL)
 SRC_S = $(SRC_ARCH)
 
 OBJ_C = $(SRC_C:.c=.o)
