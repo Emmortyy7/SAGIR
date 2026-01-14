@@ -1,28 +1,13 @@
-# ==========================
-# Toolchain
-# ==========================
 CC      = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
 
-
-# ==========================
-# Output files
-# ==========================
 TARGET_ELF = firmware.elf
 TARGET_BIN = firmware.bin
 
-
-# ==========================
-# MCU configuration
-# ==========================
 MCU   = cortex-m4
 FPU   = fpv4-sp-d16
 FLOAT = hard
 
-
-# ==========================
-# Compiler flags
-# ==========================
 CFLAGS = \
 	-mcpu=$(MCU) \
 	-mthumb \
@@ -32,67 +17,61 @@ CFLAGS = \
 	-O0 \
 	-g \
 	-ffunction-sections \
-	-fdata-sections
+	-fdata-sections \
+	-DSTM32F446xx \
+	-DUSE_HAL_DRIVER
 
-
-# ==========================
-# Linker flags
-# ==========================
 LDFLAGS = \
 	-T embedded/linker/STM32F446RE_FLASH.ld \
 	-Wl,--gc-sections
 
-
-# ==========================
-# Include paths
-# ==========================
 INCLUDES = \
+	-Iembedded/include \
+	-Iembedded/board \
+	-Iembedded/drivers \
+	-Iembedded/config \
 	-Iembedded/board/stm32f446 \
 	-Iembedded/hal/CMSIS/Core/Include \
-	-Iembedded/hal/CMSIS/Device/ST/STM32F4xx/Include
+	-Iembedded/hal/CMSIS/Device/ST/STM32F4xx/Include \
+	-Iembedded/hal/STM32F4xx_HAL_Driver/Inc
 
+SRC_APP = \
+	embedded/app/main.c
 
-# ==========================
-# Source files
-# ==========================
-SRC_C = \
-	embedded/app/main.c \
-	embedded/board/stm32f446/board.c \
-	embedded/hal/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
+SRC_BOARD = \
+	embedded/board/board.c \
+	embedded/board/stm32f446/board.c
 
-SRC_S = \
+SRC_HAL = \
+	embedded/hal/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c \
+	embedded/hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+	embedded/hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
+	embedded/hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+	embedded/hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+
+SRC_ARCH = \
 	embedded/arch/arm/cortex-m4/startup_stm32f446xx.s
 
+SRC_C = $(SRC_APP) $(SRC_BOARD) $(SRC_HAL)
+SRC_S = $(SRC_ARCH)
 
-# ==========================
-# Object files
-# ==========================
 OBJ_C = $(SRC_C:.c=.o)
 OBJ_S = $(SRC_S:.s=.o)
 OBJS  = $(OBJ_C) $(OBJ_S)
 
-
-# ==========================
-# Build rules
-# ==========================
 all: $(TARGET_ELF) $(TARGET_BIN)
-
 
 $(TARGET_ELF): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $@
 
-
 $(TARGET_BIN): $(TARGET_ELF)
 	$(OBJCOPY) -O binary $< $@
-
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-
 %.o: %.s
 	$(CC) $(CFLAGS) -c $< -o $@
-
 
 clean:
 	rm -f $(OBJS) $(TARGET_ELF) $(TARGET_BIN)
