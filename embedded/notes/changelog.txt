@@ -1,1 +1,7 @@
+-- 15/01/26 -- 
 
+print fonksiyonları print için uart ayarı yapıldı.
+board.h board.c temel seviyede de olsa yazıldı
+compile ayarları yapıldı sorunsuz compile için değişiklikler yapıldı.
+
+-- 15/01/26
