@@ -7,10 +7,17 @@
 
 #pragma once
 
+#include "stm32f4xx_hal.h"
+#include "stm32f4xx_hal_uart.h"
 #include "stm32f446xx.h"
 #include "stm32f4xx.h"
+#include "config.h"
+#include "__printf.h"
+
+UART_HandleTypeDef huart1;
 
 void SystemClock_Config(void);
 void Error_Handler(void);
-void board_init(void);
-void set_GPIO(void);
+void MX_USART1_UART_Init(void);
+void MX_GPIO_Init(void);
+void board_init();
