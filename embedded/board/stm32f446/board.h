@@ -8,6 +8,7 @@
 #pragma once
 
 #include "stm32f446xx.h"
+#include "stm32f4xx.h"
 
 void SystemClock_Config(void);
 void Error_Handler(void);
