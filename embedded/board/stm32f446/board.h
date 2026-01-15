@@ -9,4 +9,7 @@
 
 #include "stm32f446xx.h"
 
+void SystemClock_Config(void);
+void Error_Handler(void);
 void board_init(void);
+void set_GPIO(void);
