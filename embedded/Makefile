@@ -50,7 +50,8 @@ SRC_HAL = \
 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
-	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+ 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
 
 SRC_ARCH = \
 	arch/arm/cortex-m4/startup_stm32f446xx.s

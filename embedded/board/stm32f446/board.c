@@ -16,7 +16,8 @@ void board_init(void) {
 
 /* All GPIO settings will be done in here. */
 void MX_GPIO_Init(void) {
-    
+
+    #ifdef F446_MCU
     __HAL_RCC_GPIOA_CLK_ENABLE();
 
     /* UART1 for debugging. */
@@ -27,11 +28,14 @@ void MX_GPIO_Init(void) {
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
     HAL_GPIO_Init(UART_CMD_PIN_GROUP__UART1, &GPIO_InitStruct);
+    #endif
+
 }
 
 /* Setting up UART for debugging like arduino serial port. */
 void MX_USART1_UART_Init(void) {    
-    
+
+    #ifdef F446_MCU    
     __HAL_RCC_USART1_CLK_ENABLE();
 
     huart1.Instance = USART1;
@@ -43,6 +47,8 @@ void MX_USART1_UART_Init(void) {
     huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     huart1.Init.OverSampling = UART_OVERSAMPLING_16;
     HAL_UART_Init(&huart1);
+    #endif
+    
 }
 
 /*

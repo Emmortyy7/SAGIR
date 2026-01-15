@@ -265,6 +265,7 @@
   * @brief HAL UART module driver
   * @{
   */
+  
 #ifdef HAL_UART_MODULE_ENABLED
 
 /* Private typedef -----------------------------------------------------------*/

@@ -7,14 +7,14 @@
 
 #pragma once
 
+#include "config.h"
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_uart.h"
 #include "stm32f446xx.h"
 #include "stm32f4xx.h"
-#include "config.h"
 #include "__printf.h"
 
-UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart1;
 
 void SystemClock_Config(void);
 void Error_Handler(void);
