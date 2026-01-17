@@ -26,7 +26,7 @@ LDFLAGS = \
 	-Wl,--gc-sections
 
 INCLUDES = \
-	-ICore/Inc \
+	-ICore/stm32f446/Inc \
 	-Iinclude \
 	-Iboard \
 	-Iboard/stm32f446 \
@@ -43,15 +43,17 @@ SRC_BOARD = \
 	board/stm32f446/board.c
 
 SRC_CUBEMX = \
-	Core/Src/system_stm32f4xx.c \
-	Core/Src/stm32f4xx_it.c
+	Core/stm32f446/Src/system_stm32f4xx.c \
+	Core/stm32f446/Src/stm32f4xx_it.c
 
 SRC_HAL = \
 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
- 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
+ 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c \
+ 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c \
+ 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
 
 SRC_ARCH = \
 	arch/arm/cortex-m4/startup_stm32f446xx.s

@@ -1,8 +1,15 @@
 #include "board.h"
 
+/* Handles.  */
 UART_HandleTypeDef huart1;
 
-/* This function is for setting up the mcu and its peripherals. */
+
+/* 
+
+Setting up the mcu for the things we gonna do.
+This function is for setting up the mcu and its peripherals. 
+
+*/
 void board_init(void) {
 
     /* Init things. */
@@ -11,13 +18,16 @@ void board_init(void) {
     MX_GPIO_Init();
     MX_USART1_UART_Init();    
     
-    /* ENABLE IRQ GIVING EXTI */
 }
 
-/* All GPIO settings will be done in here. */
+/* 
+
+All GPIO settings will be done in here. 
+
+*/
 void MX_GPIO_Init(void) {
 
-    #ifdef F446_MCU
+    #ifdef DEBUG_MODE
     __HAL_RCC_GPIOA_CLK_ENABLE();
 
     /* UART1 for debugging. */
@@ -29,13 +39,18 @@ void MX_GPIO_Init(void) {
     GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
     HAL_GPIO_Init(UART_CMD_PIN_GROUP__UART1, &GPIO_InitStruct);
     #endif
-
+    
 }
 
-/* Setting up UART for debugging like arduino serial port. */
+/* 
+
+Using UART1 for debugging purposes.
+Setting up UART for debugging like arduino serial port. 
+
+*/
 void MX_USART1_UART_Init(void) {    
 
-    #ifdef F446_MCU    
+    #ifdef DEBUG_MODE
     __HAL_RCC_USART1_CLK_ENABLE();
 
     huart1.Instance = USART1;
@@ -53,6 +68,7 @@ void MX_USART1_UART_Init(void) {
 
 /*
 
+    Configuring HSI/HSE (gonna decide it later probably gonna use HSE.) 
     CUBEMX output.
 
 */
@@ -87,6 +103,7 @@ void SystemClock_Config(void) {
 
 /*
 
+    Handling Errors.
     CUBEMX output.
 
 */
