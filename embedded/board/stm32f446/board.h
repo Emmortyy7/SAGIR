@@ -7,17 +7,22 @@
 
 #pragma once
 
+/* Critical files -> needs to be included first. */
 #include "config.h"
+
+/* Hal libs. */
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_uart.h"
 #include "stm32f446xx.h"
 #include "stm32f4xx.h"
+
+/* include/ */
 #include "__printf.h"
 
-extern UART_HandleTypeDef huart1;
+/* drivers/ */
+#include "internal/adc_handler.h"
+#include "internal/gpio_handler.h"
+#include "internal/uart_handler.h"
+#include "internal/system_clock_handler.h"
 
-void SystemClock_Config(void);
-void Error_Handler(void);
-void MX_USART1_UART_Init(void);
-void MX_GPIO_Init(void);
-void board_init();
+void board_init(void);

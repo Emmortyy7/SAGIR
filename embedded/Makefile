@@ -34,10 +34,18 @@ INCLUDES = \
 	-Iconfig \
 	-Ihal/CMSIS/Core/Include \
 	-Ihal/CMSIS/Device/ST/STM32F4xx/Include \
-	-Ihal/STM32F4xx_HAL_Driver/Inc
+	-Ihal/STM32F4xx_HAL_Driver/Inc \
+	-Idrivers/internal \
+	-Idrivers/external 
 
 SRC_APP = \
 	app/main.c
+
+SRC_DRIVERS = \
+	drivers/internal/uart_handler.c \
+	drivers/internal/system_clock_handler.c \
+	drivers/internal/gpio_handler.c \
+	drivers/internal/adc_handler.c
 
 SRC_BOARD = \
 	board/stm32f446/board.c
@@ -58,7 +66,7 @@ SRC_HAL = \
 SRC_ARCH = \
 	arch/arm/cortex-m4/startup_stm32f446xx.s
 
-SRC_C = $(SRC_APP) $(SRC_BOARD) $(SRC_CUBEMX) $(SRC_HAL)
+SRC_C = $(SRC_APP) $(SRC_BOARD) $(SRC_DRIVERS) $(SRC_CUBEMX) $(SRC_HAL)
 SRC_S = $(SRC_ARCH)
 
 OBJ_C = $(SRC_C:.c=.o)

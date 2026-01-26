@@ -8,3 +8,5 @@ NOT : Eğer mikroişlemci değişirse ona ait linker dosyası eklenip ona özel 
 NOT : Yeni bir peripheral eklendiği zaman Core/Inc içinden conf dosyasını bulup enable flagini aktif et.
 
 NOT : Yeni bir peripheral ekleneceği zaman hal altında bulunan o peripherala ait driver dosyasını makefile a ekle
+
+NOT : Herhangi bir .c dosyası makefile a eklenmek zorunda 
