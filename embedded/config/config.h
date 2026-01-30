@@ -9,5 +9,7 @@
 /* DEBUGGING FLAGS  */
 #define DEBUG_MODE
 
-/* pinmap.h is at the botttom because flags needs to be defined first.  */
+/* Flags needs to be defined first.  */
 #include "pinmap.h"
+#include "buffers.h"
+#include "interrupt_priority_settings.h"

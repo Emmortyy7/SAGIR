@@ -16,8 +16,5 @@ This function is for setting up the mcu and its peripherals.
 void board_init(void) {
     
     /* Init things. */
-    HAL_Init();
-    SystemClock_Config();
-    MX_GPIO_Init();
-    MX_USART1_UART_Init();        
+    HAL_Init();    
 }

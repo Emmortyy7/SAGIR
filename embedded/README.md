@@ -10,3 +10,5 @@ NOT : Yeni bir peripheral eklendiği zaman Core/Inc içinden conf dosyasını bu
 NOT : Yeni bir peripheral ekleneceği zaman hal altında bulunan o peripherala ait driver dosyasını makefile a ekle
 
 NOT : Herhangi bir .c dosyası makefile a eklenmek zorunda 
+
+NOT : ADC de mcu frekans bilgilerine göre güncelle 

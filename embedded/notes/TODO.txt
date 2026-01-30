@@ -1,2 +1,3 @@
-Daha esnek bir kod için Core klasoru mikroişlemci modelinin klasorunun altına alınsın bu şekilde farklı mikroişlemci gelirse daha kolay portlanır
 HSI den HSE ye geç cubemx ten yeni çıktı al
+FreeRTOS
+ADC SPI ve mcu clock ayarlarını düzenle ona göre ayar çek ÇOK ÖNEMLİ koddaki clocklar sembolik

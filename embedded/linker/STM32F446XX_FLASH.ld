@@ -180,7 +180,17 @@ SECTIONS
     _ebss = .;         /* define a global symbol at bss end */
     __bss_end__ = _ebss;
   } >RAM
-
+  
+  /* --- IMPORTANT --- This is for holding audio. */
+  .audio_dma (NOLOAD) :
+  {
+    . = ALIGN(4);
+    _audio_dma_start = .;
+    . += 64K;
+    _audio_dma_end = .;
+    . = ALIGN(4);
+  } >RAM
+  
   /* User_heap_stack section, used to check that there is enough RAM left */
   ._user_heap_stack :
   {

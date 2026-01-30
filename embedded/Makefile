@@ -36,16 +36,21 @@ INCLUDES = \
 	-Ihal/CMSIS/Device/ST/STM32F4xx/Include \
 	-Ihal/STM32F4xx_HAL_Driver/Inc \
 	-Idrivers/internal \
-	-Idrivers/external 
+	-Idrivers/external \
+	-Idrivers/external/sx126x_semtech_driver
 
 SRC_APP = \
 	app/main.c
 
 SRC_DRIVERS = \
-	drivers/internal/uart_handler.c \
+	drivers/internal/uart_usart_handler.c \
 	drivers/internal/system_clock_handler.c \
 	drivers/internal/gpio_handler.c \
-	drivers/internal/adc_handler.c
+	drivers/internal/hydrophone_input_stream_handler__adc1_dma2_tim2.c \
+	drivers/internal/sx126x_spi_handler.c \
+	drivers/external/sx126x_hal.c \
+	drivers/external/sx126x_semtech_driver/sx126x.c \
+	drivers/external/sx126x_semtech_driver/sx126x_driver_version.c
 
 SRC_BOARD = \
 	board/stm32f446/board.c
@@ -61,7 +66,8 @@ SRC_HAL = \
 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
  	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c \
  	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c \
- 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
+ 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c \
+ 	hal/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
 
 SRC_ARCH = \
 	arch/arm/cortex-m4/startup_stm32f446xx.s
