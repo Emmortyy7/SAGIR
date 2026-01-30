@@ -1,3 +1,5 @@
-HSI den HSE ye geç cubemx ten yeni çıktı al
+HSI den HSE ye geç cubemx ten yeni çıktı al (sadece sysclock config etkilenmeme ihtimaline karşı tam yeni hal daha iyi olur)
 FreeRTOS
 ADC SPI ve mcu clock ayarlarını düzenle ona göre ayar çek ÇOK ÖNEMLİ koddaki clocklar sembolik
+lora protokol yazıldıktan sonra artık daha donanımdan soyut bşr katmana geçip node yazılmaya başlancak
+mspinit fonksiyonları kullanmıyoruz gerekirmi ona bak board.c tam board init yap
